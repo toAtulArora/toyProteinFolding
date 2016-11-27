@@ -1,0 +1,7 @@
+* Progress
+- [X] C++ Vectors
+- [X] Visualisation Basic | outputs a graph (sort of)
+- [X] Folding algorithm (avoid collisions)
+- [X] Score from graph
+- [X] Visualisation improved (outputs ABCD..)
+- [X] Optimal result, iterator over all results
