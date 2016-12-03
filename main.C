@@ -12,7 +12,7 @@ using namespace std;
 #define vec2d vector< vector<int> >
 #define str2d vector< vector<char> >
 
-string proteinSequence="HHHPPP";
+string proteinSequence="HHHHHH";
 char charBlank='`';
 int score;
 vector< vector<int> > direction={{1,0},{0,1},{0,-1},{-1,0}};//,{1,1},{-1,-1},{1,-1},{-1,1}};
@@ -90,14 +90,14 @@ void findCorners(vector< vector<int> > positions, int &maxX, int &minX, int &max
   minY=minX;
 
   for(auto pos:positions){
-    if(pos[0]>maxX)
-      maxX=pos[0];
-    if(pos[1]>maxY)
-      maxY=pos[1];
-    if(pos[0]<minX)
-      minX=pos[0];
-    if(pos[1]<minY)
-      minY=pos[1];
+    if(pos[1]>maxX)
+      maxX=pos[1];
+    if(pos[0]>maxY)
+      maxY=pos[0];
+    if(pos[1]<minX)
+      minX=pos[1];
+    if(pos[0]<minY)
+      minY=pos[0];
   }
 }
 
@@ -108,27 +108,36 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
   int maxX,maxY,minX,minY;
   findCorners(positions,maxX,minX,maxY,minY);
   // cout<<"Max:"<<maxX<<","<<maxY<<"\nMin:"<<minX<<","<<minY<<"\n";
-  int rows=maxX-minX+1,cols=maxY-minY+1;
-  vector<int> minusOrigin = {-minX,-minY};
+  int cols=maxX-minX+1,rows=maxY-minY+1;
+  vector<int> minusOrigin = {-minY,-minX};
   vector<int> cPos;
-  int counter=0;
+  int counter;
+  counter=0;
   //Initialise a blank plot & the score
   vector< vector<char> > plot(rows,vector<char>(cols,charBlank));
+  vector< vector<char> > plotInit(rows,vector<char>(cols,charBlank));
+  vector< vector<char> > plotTest;
   proteinPlot = plot;
   proteinPlotNum = plot;
   score = 0;
 
+  cout<<"NEW ITERATION\n";
   //Construct the plot, calculate the score and check for validity on the fly
   for(auto pos:positions){
-    cPos=pos + minusOrigin;
+    plotTest=plotInit; //initalize this; for debugging only
+    cPos=pos + minusOrigin; 
+    cout<<"counter check:"<<counter<<"\n";
 
+    //Condition for a valid cPos is not necessary because the origin shifting and size of array should automatically take this into consideration
+    
     //Condition for collisions
     if(proteinPlot[cPos[0]][cPos[1]] != charBlank){
     	return 1;
     }
+    
     proteinPlot[cPos[0]][cPos[1]]=sequence[counter];
     proteinPlotNum[cPos[0]][cPos[1]]='A'+counter;
-
+    
     //Now calculate the score
     //
     if(sequence[counter]=='H' && counter>0){
@@ -138,54 +147,83 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
       
       x=cPos[0]+1;
       y=cPos[1];
-      if(x>=0 && x<cols && y>=0 && y<rows){
+      if(x>=0 && x<rows && y>=0 && y<cols){
   	if(proteinPlot[x][y] == proteinPlot[cPos[0]][cPos[1]] && \
-  	   x != positions[counter-1][0] && \
-  	   y != positions[counter-1][1] \
+  	   (x != (positions[counter-1][0] + minusOrigin[0]) ||		\
+	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
+	  plotTest[cPos[0]][cPos[1]]='X';
+	  plotTest[x][y]='Y';
+	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  cout<<"counter:"<<counter<<"\n";
+	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  cout<<"x,y:"<<x<<","<<y<<"\n";
+	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
 
       x=cPos[0]-1;
       y=cPos[1];
-      if(x>=0 && x<cols && y>=0 && y<rows){
+      if(x>=0 && x<rows && y>=0 && y<cols){
   	if(proteinPlot[x][y] == proteinPlot[cPos[0]][cPos[1]] && \
-  	   x != positions[counter-1][0] && \
-  	   y != positions[counter-1][1] \
+  	   (x != (positions[counter-1][0] + minusOrigin[0]) ||		\
+	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
+	  plotTest[cPos[0]][cPos[1]]='X';
+	  plotTest[x][y]='Y';
+	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  cout<<"counter:"<<counter<<"\n";
+	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  cout<<"x,y:"<<x<<","<<y<<"\n";
+	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
 
       x=cPos[0];
       y=cPos[1]+1;
-      if(x>=0 && x<cols && y>=0 && y<rows){
+      if(x>=0 && x<rows && y>=0 && y<cols){
   	if(proteinPlot[x][y] == proteinPlot[cPos[0]][cPos[1]] && \
-  	   x != positions[counter-1][0] && \
-  	   y != positions[counter-1][1] \
+  	   (x != (positions[counter-1][0] + minusOrigin[0]) ||		\
+	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
+	  plotTest[cPos[0]][cPos[1]]='X';
+	  plotTest[x][y]='Y';
+	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  cout<<"counter:"<<counter<<"\n";
+	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  cout<<"x,y:"<<x<<","<<y<<"\n";
+	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
 
       x=cPos[0];
-      y=cPos[1]-1;
-      if(x>=0 && x<cols && y>=0 && y<rows){
+      y=cPos[1]-1; 
+      if(x>=0 && x<rows && y>=0 && y<cols){
   	if(proteinPlot[x][y] == proteinPlot[cPos[0]][cPos[1]] && \
-  	   x != positions[counter-1][0] && \
-  	   y != positions[counter-1][1] \
+  	   (x != (positions[counter-1][0] + minusOrigin[0]) ||		\
+	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
+	  plotTest[cPos[0]][cPos[1]]='X';
+	  plotTest[x][y]='Y';
+	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  cout<<"counter:"<<counter<<"\n";
+	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  cout<<"x,y:"<<x<<","<<y<<"\n";
+	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
             
     }
-    
+     
     
     counter++;
   }
 
+  cout<<"END\n\n";
   //Test the plot
   //cout<<proteinPlot;
   //cout<<proteinPlotNum;
@@ -196,14 +234,14 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
 int main()
 {
   //Initialize the direction string with 0,0,0,...
-  for(char protein:proteinSequence){
+  for(int m=0; m<proteinSequence.length()-1;m++){
     dirString.push_back(0);
   }
 
   //Initialize the proteinPos  
   cout<<"protein Sequence:"<<proteinSequence<<"\n";
 
-  while(iterations<pow(ndir,proteinSequence.length()) ){
+  while(iterations<pow(ndir,proteinSequence.length()-1) ){
 
     //Increment the direction string
     for (auto& d:reverse(dirString)) {
@@ -218,18 +256,20 @@ int main()
     //proteinPos.clear();
     proteinPos={{0,0}};
     //for(char protein:proteinSequence)    {
-    for(int i=2; i<=proteinSequence.length();i++){
-      proteinPos.push_back(proteinPos.back() + direction[dirString[i]]);
+    for(int i=1; i<=proteinSequence.length()-1;i++){
+      //proteinPos.push_back(proteinPos.back() + direction[dirString[i]]);
+      proteinPos.push_back(proteinPos[i-1]+direction[dirString[i-1]]);
       //i++;
     }
 
-    //cout<<"protein Sequence:"<<proteinSequence<<"\n";    
+    //cout<<"protein Sequence:"<<proteinSequence<<"\n";
     if(visualise (proteinPos,proteinSequence,proteinPlot,proteinPlotNum,score) == 0){
       if(score>=bestScore){
 	//cout<<proteinPos;
 	cout<<"Found something\n";
 	cout<<proteinPlot;
 	cout<<proteinPlotNum;
+	cout<<proteinPos;
 	cout<<dirString;
 	cout<<"Score:"<<score<<"\n";
 	cout<<"---------------\n";
@@ -243,3 +283,54 @@ int main()
   }
   return 0;
 }
+
+
+/*
+Found something
+[
+H H 
+H H 
+` H 
+` H 
+]
+[
+E D 
+F C 
+` B 
+` A 
+]
+[3 3 3 3 3 2 ]
+Score:3
+---------------
+Found something
+[
+H H 
+H H 
+H H 
+]
+[
+E D 
+F C 
+A B 
+]
+[1 1 1 3 3 2 ]
+Score:3
+---------------
+Found something
+[
+H H 
+H H 
+` H 
+` H 
+]
+[
+E D 
+F C 
+` B 
+` A 
+]
+[1 1 3 3 3 2 ]
+Score:3
+---------------
+
+ */

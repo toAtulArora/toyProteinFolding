@@ -5,10 +5,10 @@ PROGRAM = main
 all: $(PROGRAM)
 
 $(PROGRAM): $(SRC)
-	g++ -std=c++14 -o $@  $^
+	g++ -g -std=c++14 -o $@  $^
 
 %.o : %.C
-	g++ -std=c++14 -o $@ -c $<
+	g++ -g -std=c++14 -o $@ -c $<
 
 clean:
 	rm -f *.o
