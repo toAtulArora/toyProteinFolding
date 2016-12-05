@@ -6,21 +6,21 @@
 3. To run for a sequence, try ```./main HAHHHAHAH```
 4. To run for a batch saved in a text file,
 
-⋅⋅1. Install GNU parallel (in ubuntu, ```sudo apt install parallel```)
+1. Install GNU parallel (in ubuntu, ```sudo apt install parallel```)
 
-⋅⋅2. Save your sequences in a text file called, say, ```testSequences.txt```
+2. Save your sequences in a text file called, say, ```testSequences.txt```
 
-⋅⋅3. Now use ```cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'``` and it will save the result in ```output.log``` or just run the script called ```./batchMain```
+3. Now use ```cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'``` and it will save the result in ```output.log``` or just run the script called ```./batchMain```
 
-⋅⋅4. Some explanation of what happened in the last step
+4. Some explanation of what happened in the last step
 
-...* The bash script pipes the output of the text file into the parallel command.
+* The bash script pipes the output of the text file into the parallel command.
 
-...* The ```-j+0``` tells parallel to use as many cores as in the CPU + 0 extra.
+* The ```-j+0``` tells parallel to use as many cores as in the CPU + 0 extra.
 
-...* The ```--eta``` will tell you how long it might take.
+* The ```--eta``` will tell you how long it might take.
 
-...* The ```'./main``` is the command that it will run. ```{}``` will fetch one string at a time from the stream inputted to parallel. ```>> output.log``` would append the output from the program into the file.
+* The ```'./main``` is the command that it will run. ```{}``` will fetch one string at a time from the stream inputted to parallel. ```>> output.log``` would append the output from the program into the file.
 
 
 ## Sample Output
