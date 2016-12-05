@@ -10,12 +10,14 @@ using namespace std;
 
 
 #define vec2d vector< vector<int> >
+#define vec1d vector<int>
 #define str2d vector< vector<char> >
-
+#define str1d vector<char>
 string proteinSequence="HHHAHHAAAHAHAH";
 char charBlank='`';
 int score;
 vector< vector<int> > direction={{1,0},{0,1},{0,-1},{-1,0}};//,{1,1},{-1,-1},{1,-1},{-1,1}};
+vector<char>  directionChar={'|','-','-','|'};			     
 const int ndir=4;
 int iterations=0;
 int bestScore=0;
@@ -23,6 +25,7 @@ vector<int> bestDirString;
 vector< vector<int> > proteinPos;
 vector< vector<char> > proteinPlot ;
 vector< vector<char> > proteinPlotNum ;
+vector< vector<char> > proteinPlotPretty;
 vector<int> dirString;
 //For reverse iterating
 template<typename It>
@@ -104,7 +107,7 @@ void findCorners(vector< vector<int> > positions, int &maxX, int &minX, int &max
 //Calculates the visualization
 //Returns 1 if there's an intersection and aborts
 //Returns 0 if it thinks everything went smooth
-int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &proteinPlotNum,int &score){
+int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &proteinPlotPretty, vec1d &dirString, vec2d &direction, str1d &directionChar,str2d &proteinPlotNum,int &score){
   int maxX,maxY,minX,minY;
   findCorners(positions,maxX,minX,maxY,minY);
   // cout<<"Max:"<<maxX<<","<<maxY<<"\nMin:"<<minX<<","<<minY<<"\n";
@@ -116,9 +119,11 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
   //Initialise a blank plot & the score
   vector< vector<char> > plot(rows,vector<char>(cols,charBlank));
   vector< vector<char> > plotInit(rows,vector<char>(cols,charBlank));
+  vector< vector<char> > plotPrettyInit(rows*2, vector<char> (cols*2, ' '));
   vector< vector<char> > plotTest;
   proteinPlot = plot;
   proteinPlotNum = plot;
+  proteinPlotPretty = plotPrettyInit;
   score = 0;
 
   // cout<<"NEW ITERATION\n";
@@ -136,6 +141,12 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
     }
     
     proteinPlot[cPos[0]][cPos[1]]=sequence[counter];
+    proteinPlotPretty[cPos[0]*2][cPos[1]*2]=sequence[counter];
+    if(counter>0){
+	int x=cPos[1]*2 - direction[dirString[counter-1]][1];
+	int y=cPos[0]*2 - direction[dirString[counter-1]][0];
+	proteinPlotPretty[y][x]=directionChar[dirString[counter-1]];	
+	}
     proteinPlotNum[cPos[0]][cPos[1]]='A'+counter;
     
     //Now calculate the score
@@ -264,11 +275,12 @@ int main()
     }
 
     //cout<<"protein Sequence:"<<proteinSequence<<"\n";
-    if(visualise (proteinPos,proteinSequence,proteinPlot,proteinPlotNum,score) == 0){
+    if(visualise (proteinPos,proteinSequence,proteinPlot,proteinPlotPretty,dirString,direction,directionChar,proteinPlotNum,score) == 0){
       if(score>=bestScore){
 	//cout<<proteinPos;
 	cout<<"Found something\n";
-	cout<<proteinPlot;
+	// cout<<proteinPlot;
+	cout<<proteinPlotPretty;
 	cout<<proteinPlotNum;
 	cout<<proteinPos;
 	cout<<dirString;
