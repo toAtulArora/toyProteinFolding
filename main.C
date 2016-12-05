@@ -12,7 +12,7 @@ using namespace std;
 #define vec2d vector< vector<int> >
 #define str2d vector< vector<char> >
 
-string proteinSequence="HHHHHH";
+string proteinSequence="HHHAHHAAAHAHAH";
 char charBlank='`';
 int score;
 vector< vector<int> > direction={{1,0},{0,1},{0,-1},{-1,0}};//,{1,1},{-1,-1},{1,-1},{-1,1}};
@@ -121,12 +121,12 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
   proteinPlotNum = plot;
   score = 0;
 
-  cout<<"NEW ITERATION\n";
+  // cout<<"NEW ITERATION\n";
   //Construct the plot, calculate the score and check for validity on the fly
   for(auto pos:positions){
     plotTest=plotInit; //initalize this; for debugging only
     cPos=pos + minusOrigin; 
-    cout<<"counter check:"<<counter<<"\n";
+    // cout<<"counter check:"<<counter<<"\n";
 
     //Condition for a valid cPos is not necessary because the origin shifting and size of array should automatically take this into consideration
     
@@ -144,6 +144,7 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
       int x=0,y=0;
 
       //Lazy to do this properly :(
+      //For logical consistency, swap x and y.
       
       x=cPos[0]+1;
       y=cPos[1];
@@ -153,13 +154,13 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
 	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
-	  plotTest[cPos[0]][cPos[1]]='X';
-	  plotTest[x][y]='Y';
-	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
-	  cout<<"counter:"<<counter<<"\n";
-	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
-	  cout<<"x,y:"<<x<<","<<y<<"\n";
-	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
+	  // plotTest[cPos[0]][cPos[1]]='X';
+	  // plotTest[x][y]='Y';
+	  // cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  // cout<<"counter:"<<counter<<"\n";
+	  // cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  // cout<<"x,y:"<<x<<","<<y<<"\n";
+	  // cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
 
@@ -171,13 +172,13 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
 	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
-	  plotTest[cPos[0]][cPos[1]]='X';
-	  plotTest[x][y]='Y';
-	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
-	  cout<<"counter:"<<counter<<"\n";
-	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
-	  cout<<"x,y:"<<x<<","<<y<<"\n";
-	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
+	  // plotTest[cPos[0]][cPos[1]]='X';
+	  // plotTest[x][y]='Y';
+	  // cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  // cout<<"counter:"<<counter<<"\n";
+	  // cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  // cout<<"x,y:"<<x<<","<<y<<"\n";
+	  // cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
 
@@ -189,13 +190,13 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
 	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
-	  plotTest[cPos[0]][cPos[1]]='X';
-	  plotTest[x][y]='Y';
-	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
-	  cout<<"counter:"<<counter<<"\n";
-	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
-	  cout<<"x,y:"<<x<<","<<y<<"\n";
-	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
+	  // plotTest[cPos[0]][cPos[1]]='X';
+	  // plotTest[x][y]='Y';
+	  // cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  // cout<<"counter:"<<counter<<"\n";
+	  // cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  // cout<<"x,y:"<<x<<","<<y<<"\n";
+	  // cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
 
@@ -207,13 +208,13 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
 	    y != (positions[counter-1][1] + minusOrigin[1])	)	\
   	   ){
   	  score+=1;
-	  plotTest[cPos[0]][cPos[1]]='X';
-	  plotTest[x][y]='Y';
-	  cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
-	  cout<<"counter:"<<counter<<"\n";
-	  cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
-	  cout<<"x,y:"<<x<<","<<y<<"\n";
-	  cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
+	  // plotTest[cPos[0]][cPos[1]]='X';
+	  // plotTest[x][y]='Y';
+	  // cout<<"maxRow and maxCol"<<rows<<' '<<cols<<"\n"<<plotTest;
+	  // cout<<"counter:"<<counter<<"\n";
+	  // cout<<proteinPlot[cPos[0]][cPos[1]]<<"\n";       
+	  // cout<<"x,y:"<<x<<","<<y<<"\n";
+	  // cout<<"cPos"<<cPos[0]<<","<<cPos[1]<<"\n";
   	}
       }
             
@@ -223,7 +224,7 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
     counter++;
   }
 
-  cout<<"END\n\n";
+  // cout<<"END\n\n";
   //Test the plot
   //cout<<proteinPlot;
   //cout<<proteinPlotNum;
@@ -241,7 +242,7 @@ int main()
   //Initialize the proteinPos  
   cout<<"protein Sequence:"<<proteinSequence<<"\n";
 
-  while(iterations<pow(ndir,proteinSequence.length()-1) ){
+  while(iterations<pow(ndir,proteinSequence.length()-2) ){
 
     //Increment the direction string
     for (auto& d:reverse(dirString)) {
