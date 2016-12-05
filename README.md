@@ -6,13 +6,13 @@
 3. To run for a sequence, try ```./main HAHHHAHAH```
 4. To run for a batch saved in a text file,
 
-1. Install GNU parallel (in ubuntu, ```sudo apt install parallel```)
+(a) Install GNU parallel (in ubuntu, ```sudo apt install parallel```)
 
-2. Save your sequences in a text file called, say, ```testSequences.txt```
+(b) Save your sequences in a text file called, say, ```testSequences.txt```
 
-3. Now use ```cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'``` and it will save the result in ```output.log``` or just run the script called ```./batchMain```
+(c). Now use ```cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'``` and it will save the result in ```output.log``` or just run the script called ```./batchMain```
 
-4. Some explanation of what happened in the last step
+(d). Some explanation of what happened in the last step
 
 * The bash script pipes the output of the text file into the parallel command.
 
