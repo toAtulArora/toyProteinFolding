@@ -10,9 +10,9 @@
 
 (b) Save your sequences in a text file called, say, ```testSequences.txt```
 
-(c). Now use ```cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'``` and it will save the result in ```output.log``` or just run the script called ```./batchMain```
+(c) Now use ```cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'``` and it will save the result in ```output.log``` or just run the script called ```./batchMain```
 
-(d). Some explanation of what happened in the last step
+(d) Some explanation of what happened in the last step
 
 * The bash script pipes the output of the text file into the parallel command.
 
@@ -25,16 +25,24 @@
 
 ## Sample Output
 ```
-protein Sequence:HHHAH
-1
+
+
+Protein Sequence:HHHAH
+Best Score:1
+Possible Configuration:
 [
     H - A   
         |   
 H - H - H   
             
 ]
-protein Sequence:HHHAHAH
-1
+
+
+
+
+Protein Sequence:HHHAHAH
+Best Score:1
+Possible Configuration:
 [
     H   
     |   
@@ -47,8 +55,13 @@ H - H
     H   
         
 ]
-protein Sequence:HHAHHAHHH
-3
+
+
+
+
+Protein Sequence:HHAHHAHHH
+Best Score:3
+Possible Configuration:
 [
 H - H - H   
         |   
@@ -59,8 +72,13 @@ A - H
     H       
             
 ]
-protein Sequence:HAHHHAHAHA
-2
+
+
+
+
+Protein Sequence:HAHHHAHAHA
+Best Score:2
+Possible Configuration:
 [
     A       
     |       
@@ -75,4 +93,7 @@ H - H - H
 A - H       
             
 ]
+
+
+
 ```

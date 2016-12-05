@@ -253,7 +253,7 @@ int main(int argc, char** argv)
   }
 
   //Initialize the proteinPos  
-  cout<<"protein Sequence:"<<proteinSequence<<"\n";
+  cout<<"\n\nProtein Sequence:"<<proteinSequence<<"\n";
 
   while(iterations<pow(ndir,proteinSequence.length()-2) ){
 
@@ -297,57 +297,7 @@ int main(int argc, char** argv)
       score=0;
   }
 
-  cout<<bestScore<<"\n"<<bestProteinPlotPretty;
+  cout<<"Best Score:"<<bestScore<<"\nPossible Configuration:\n"<<bestProteinPlotPretty<<"\n\n";
   return 0;
 }
 
-
-/*
-Found something
-[
-H H 
-H H 
-` H 
-` H 
-]
-[
-E D 
-F C 
-` B 
-` A 
-]
-[3 3 3 3 3 2 ]
-Score:3
----------------
-Found something
-[
-H H 
-H H 
-H H 
-]
-[
-E D 
-F C 
-A B 
-]
-[1 1 1 3 3 2 ]
-Score:3
----------------
-Found something
-[
-H H 
-H H 
-` H 
-` H 
-]
-[
-E D 
-F C 
-` B 
-` A 
-]
-[1 1 3 3 3 2 ]
-Score:3
----------------
-
- */
