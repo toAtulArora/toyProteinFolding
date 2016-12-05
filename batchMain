@@ -1,0 +1,5 @@
+rm output.log
+cat testSequences.txt | parallel -j+0 --eta './main {} >> output.log'
+echo "OUTPUT"
+cat output.log
+echo "Saved to output.log"

@@ -13,7 +13,7 @@ using namespace std;
 #define vec1d vector<int>
 #define str2d vector< vector<char> >
 #define str1d vector<char>
-string proteinSequence="HHHAHHAAAHAHAH";
+string proteinSequence="HHHAHHAAH";
 char charBlank='`';
 int score;
 vector< vector<int> > direction={{1,0},{0,1},{0,-1},{-1,0}};//,{1,1},{-1,-1},{1,-1},{-1,1}};
@@ -26,6 +26,7 @@ vector< vector<int> > proteinPos;
 vector< vector<char> > proteinPlot ;
 vector< vector<char> > proteinPlotNum ;
 vector< vector<char> > proteinPlotPretty;
+vector< vector<char> > bestProteinPlotPretty;
 vector<int> dirString;
 //For reverse iterating
 template<typename It>
@@ -243,8 +244,9 @@ int visualise (vec2d positions,string sequence,str2d &proteinPlot,str2d &protein
 }
 
 
-int main()
+int main(int argc, char** argv)
 {
+  proteinSequence=argv[1];
   //Initialize the direction string with 0,0,0,...
   for(int m=0; m<proteinSequence.length()-1;m++){
     dirString.push_back(0);
@@ -278,22 +280,24 @@ int main()
     if(visualise (proteinPos,proteinSequence,proteinPlot,proteinPlotPretty,dirString,direction,directionChar,proteinPlotNum,score) == 0){
       if(score>=bestScore){
 	//cout<<proteinPos;
-	cout<<"Found something\n";
+	// cout<<"Found something\n";
 	// cout<<proteinPlot;
-	cout<<proteinPlotPretty;
-	cout<<proteinPlotNum;
-	cout<<proteinPos;
-	cout<<dirString;
-	cout<<"Score:"<<score<<"\n";
-	cout<<"---------------\n";
+	// cout<<proteinPlotPretty;
+	// cout<<proteinPlotNum;
+	// cout<<proteinPos;
+	// cout<<dirString;
+	// cout<<"Score:"<<score<<"\n";
+	// cout<<"---------------\n";
 	bestScore=score;
 	bestDirString=dirString;
+	bestProteinPlotPretty=proteinPlotPretty;
       }
     }
     else
       score=0;
-
   }
+
+  cout<<bestScore<<"\n"<<bestProteinPlotPretty;
   return 0;
 }
 

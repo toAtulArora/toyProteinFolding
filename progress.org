@@ -5,3 +5,7 @@
 - [X] Score from graph
 - [X] Visualisation improved (outputs ABCD..)
 - [X] Optimal result, iterator over all results
+- [X] Pretty Plot
+- [X] Display only best output
+- [X] Take arguments from command line
+- [X] Multi-threaded bash script
